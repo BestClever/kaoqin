@@ -11,5 +11,5 @@ import com.kaoqin.vo.StudentVO;
  */
 public interface StudentService {
 
-    StudentVO getOne();
+    StudentVO getOne(StudentVO studentVO);
 }

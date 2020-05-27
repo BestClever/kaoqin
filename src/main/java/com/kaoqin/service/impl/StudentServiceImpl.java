@@ -1,5 +1,11 @@
 package com.kaoqin.service.impl;
 
+import com.kaoqin.mapper.StudentMapper;
+import com.kaoqin.service.StudentService;
+import com.kaoqin.vo.StudentVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 /**
  * @author BestClever
  * @title: StudentServiceImpl
@@ -7,5 +13,15 @@ package com.kaoqin.service.impl;
  * @description: TODO
  * @date 2020-05-27 17:10
  */
-public class StudentServiceImpl {
+@Service
+public class StudentServiceImpl implements StudentService {
+
+    @Autowired
+    private StudentMapper studentMapper;
+
+    @Override
+    public StudentVO getOne(StudentVO studentVO) {
+
+        return studentMapper.getOne(studentVO);
+    }
 }
