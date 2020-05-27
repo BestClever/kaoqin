@@ -6,8 +6,8 @@ package com.kaoqin.baseframework.exception;
 * @Description: 基础接口
 *  自定义的错误描述枚举类需实现该接口
 * @Version:1.0.0  
-* @author pancm
-* @date 2018年6月25日
+* @author halfsummer
+* @date 2020年5月27日
  */
 public interface BaseInfoInterface {
     /** 错误码*/

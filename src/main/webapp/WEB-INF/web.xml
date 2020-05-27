@@ -3,6 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <welcome-file-list>
+        <welcome-file>login.html</welcome-file>
+    </welcome-file-list>
+
     <!-- POST提交过滤器 UTF-8 start -->
     <filter>
         <filter-name>encoding</filter-name>
@@ -38,11 +43,6 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-
-    <!--自定义监听器-->
-    <!--<listener>
-        <listener-class>com.halfsummer.framework.process.listener.SystemInitListener</listener-class>
-    </listener>-->
 
     <!-- 配置springmvc拦截器 -->
     <!-- The front controller of this Spring Web application, responsible for handling all application requests -->

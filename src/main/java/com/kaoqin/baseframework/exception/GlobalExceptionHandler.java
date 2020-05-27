@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 如果使用@RestControllerAdvice 注解
 则会将返回的数据类型转换成JSON格式
 * @Version:1.0.0  
-* @author pancm
-* @date 2018年10月24日
+* @author halfsummer
+* @date 2020年5月27日
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
