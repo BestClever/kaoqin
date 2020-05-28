@@ -13,6 +13,8 @@ public class StudentVO {
     private String password;
     private String deptId;
 
+    private String role;
+
     public String getStudentNo() {
         return studentNo;
     }
@@ -43,5 +45,13 @@ public class StudentVO {
 
     public void setDeptId(String deptId) {
         this.deptId = deptId;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

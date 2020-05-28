@@ -15,4 +15,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface StudentMapper {
 
     StudentVO getOne(StudentVO studentVO);
+
+    int saveStudent(Student student);
 }

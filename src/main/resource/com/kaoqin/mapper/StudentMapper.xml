@@ -9,4 +9,10 @@
     </where>
 </select>
 
+<insert id="saveStudent" parameterType="com.kaoqin.domain.Student">
+    insert into t_sys_student(student_no,student_name,password,dept_id) values(
+    #{studentNo},#{studentName},#{password},#{deptId}
+    )
+</insert>
+
 </mapper>

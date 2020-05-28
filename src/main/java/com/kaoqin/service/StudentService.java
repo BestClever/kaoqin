@@ -12,4 +12,6 @@ import com.kaoqin.vo.StudentVO;
 public interface StudentService {
 
     StudentVO getOne(StudentVO studentVO);
+
+    int saveStudnet(StudentVO studentVO);
 }

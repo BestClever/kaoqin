@@ -145,10 +145,19 @@
             } else {//登录
                 //调用后台登录验证的方法
                 var url = "login/login";
-                var data = {studentNo:username,password:password};
+                var data = {
+                    studentNo:username,
+                    password:password,
+                    role  :role
+                };
                 $.post(url,data,function (result) {
                     if(result.sucess){
-                        window.location.href = 'index';
+                        if(result.code == 9001){
+                            window.location.href = 'index';
+                        }else if(result.code == 9011){
+
+                        }
+
                     }else {
                         layer.msg(result.msg, {icon: 5});
                     }
@@ -165,6 +174,8 @@
                 code = $("#register-code").val(),
                 flag = false,
                 validatecode = null;
+
+            var role = $("#role").val();
             //判断用户名密码是否为空
             if (username == "") {
                 $.pt({
@@ -234,6 +245,27 @@
             if (flag) {
                 return false;
             } else {//注册
+
+                var url = "login/register";
+                var data = {
+                    studentNo:username,
+                    password:password,
+                    role  :role
+                };
+                $.post(url,data,function (result) {
+                    if(result.sucess){
+                        if(result.code == 9001){
+                            window.location.href = 'index';
+                        }else if(result.code == 9011){
+
+                        }
+
+                    }else {
+                        layer.msg(result.msg, {icon: 5});
+                    }
+                });
+
+
                 spop({
                     template: '<h4 class="spop-title">注册成功</h4>即将于3秒后返回登录',
                     position: 'top-center',
@@ -528,6 +560,10 @@
 									<!--<i class="fa fa-fw fa-wifi icon icon&#45;&#45;hideo"></i>-->
 									<!--<span class="input__label-content input__label-content&#45;&#45;hideo"></span>-->
 								<!--</label>-->
+                            <select name="role" class="input__field input__field&#45;&#45;hideo">
+                                <option value="1">教师</option>
+                                <option value="2">学生</option>
+                            </select>
 							</span>
                     </section>
                 </div>
