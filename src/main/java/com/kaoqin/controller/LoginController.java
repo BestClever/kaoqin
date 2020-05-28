@@ -59,7 +59,7 @@ public class LoginController {
         } else if (StrUtil.equals("2", studentVO.getRole())) {
 
             StudentVO one = studentService.getOne(studentVO);
-            if (ObjectUtil.isEmpty(one)) {
+            if (ObjectUtil.isNotEmpty(one)) {
                 return ResultDataUtil.createFail(CommonEnum.REGISTER_FAILUER_REPEAT);
             }
             int i = studentService.saveStudnet(studentVO);
@@ -70,5 +70,12 @@ public class LoginController {
             }
         }
         return ResultDataUtil.createFail(CommonEnum.REGISTER_FAILUER);
+    }
+
+    @RequestMapping(value = "/getUserName")
+    @ResponseBody
+    public ResultInfo getUserName(HttpServletRequest request){
+        SysUser loginUser = (SysUser) request.getSession().getAttribute("loginUser");
+        return ResultDataUtil.createSuccess(CommonEnum.SUCCESS).setData(loginUser.getUserName());
     }
 }

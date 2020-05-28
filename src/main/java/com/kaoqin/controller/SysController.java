@@ -30,7 +30,9 @@ public class SysController {
     }
 
     @RequestMapping(value = "/logout")
-    public String logout(){
+    public String logout(HttpServletRequest request){
+        //移除 session
+        request.getSession().removeAttribute("loginUser");
         return "/login";
     }
 

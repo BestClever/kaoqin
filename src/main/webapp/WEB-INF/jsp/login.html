@@ -229,17 +229,17 @@
 
             //检查注册码是否正确
             //调后台方法检查注册码，这里写死为11111111
-            if (code != '11111111') {
-                $.pt({
-                    target: $("#register-code"),
-                    position: 'r',
-                    align: 't',
-                    width: 'auto',
-                    height: 'auto',
-                    content: "注册码不正确"
-                });
-                flag = true;
-            }
+            // if (code != '11111111') {
+            //     $.pt({
+            //         target: $("#register-code"),
+            //         position: 'r',
+            //         align: 't',
+            //         width: 'auto',
+            //         height: 'auto',
+            //         content: "注册码不正确"
+            //     });
+            //     flag = true;
+            // }
 
 
             if (flag) {
@@ -254,11 +254,25 @@
                 };
                 $.post(url,data,function (result) {
                     if(result.sucess){
-                        if(result.code == 9001){
-                            window.location.href = 'index';
-                        }else if(result.code == 9011){
-
-                        }
+                        spop({
+                            template: '<h4 class="spop-title">注册成功</h4>即将于3秒后返回登录',
+                            position: 'top-center',
+                            style: 'success',
+                            autoclose: 3000,
+                            onOpen: function () {
+                                var second = 2;
+                                var showPop = setInterval(function () {
+                                    if (second == 0) {
+                                        clearInterval(showPop);
+                                    }
+                                    $('.spop-body').html('<h4 class="spop-title">注册成功</h4>即将于' + second + '秒后返回登录');
+                                    second--;
+                                }, 1000);
+                            },
+                            onClose: function () {
+                                goto_login();
+                            }
+                        });
 
                     }else {
                         layer.msg(result.msg, {icon: 5});
@@ -266,25 +280,7 @@
                 });
 
 
-                spop({
-                    template: '<h4 class="spop-title">注册成功</h4>即将于3秒后返回登录',
-                    position: 'top-center',
-                    style: 'success',
-                    autoclose: 3000,
-                    onOpen: function () {
-                        var second = 2;
-                        var showPop = setInterval(function () {
-                            if (second == 0) {
-                                clearInterval(showPop);
-                            }
-                            $('.spop-body').html('<h4 class="spop-title">注册成功</h4>即将于' + second + '秒后返回登录');
-                            second--;
-                        }, 1000);
-                    },
-                    onClose: function () {
-                        goto_login();
-                    }
-                });
+
                 return false;
             }
         }

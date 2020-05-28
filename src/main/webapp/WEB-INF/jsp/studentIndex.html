@@ -56,13 +56,26 @@
         <table class="layui-hide" id="myCourse" lay-filter="dataTable"></table>
     </div>
 </div>
+
+<!--操作-->
+<script type="text/html" id="tableTool">
+    <a class="layui-btn layui-btn-xs" lay-event="clock">打卡</a>
+</script>
 <script src="lib/layui/layui.js" charset="utf-8"></script>
 <script>
     //JavaScript代码区域
-    layui.use(['element', 'table', 'form'], function () {
+    layui.use(['element', 'table', 'form','jquery'], function () {
         var element = layui.element;
         table = layui.table,
-            form = layui.form;
+        $ = layui.jquery,
+        form = layui.form;
+
+        //获取 username
+        $.post('login/getUserName','',function (result) {
+            if(result.success){
+                $("#username").val(result.data);
+            }
+        });
 
         var myCourseTalbe = table.render({
             elem: '#myCourse'
@@ -90,6 +103,24 @@
             console.log("0000")
             return false;
         });
+
+        table.on("tool(dataTable)", function (obj) {
+            var data = obj.data;
+            switch (obj.event) {
+                case "clock":
+                    clock(data);
+                    break;
+            }
+        });
+        
+        function clock(data) {
+            layer.prompt({title: '请输入口令', formType: 1}, function(text, index){
+                layer.close(index);
+                $.post('myCourse/confirmClock',{coursePassword:text},function (result) {
+
+                });
+            });
+        }
     });
 </script>
 </body>
