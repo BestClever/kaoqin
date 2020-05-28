@@ -29,4 +29,10 @@ public class SysController {
         return "/studentIndex";
     }
 
+    @RequestMapping(value = "/indexs")
+    public String indexs(){
+        //判断是角色 是 老师还是学生
+        return "/teacherIndex";
+    }
+
 }

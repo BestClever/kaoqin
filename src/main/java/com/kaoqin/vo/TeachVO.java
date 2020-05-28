@@ -1,13 +1,16 @@
-package com.kaoqin.domain;
+package com.kaoqin.vo;
+
+import java.util.List;
 
 /**
  * 教学类
  */
-public class Teach {
+public class TeachVO {
     private String teacherNo;
     private String courseNo;
-    private String  gread;
+    private String  tclass;
     private String command;
+    private String  courseName;
 
 
     public String getTeacherNo() {
@@ -26,12 +29,12 @@ public class Teach {
         this.courseNo = courseNo;
     }
 
-    public String getGread() {
-        return gread;
+    public String getTclass() {
+        return tclass;
     }
 
-    public void setGread(String gread) {
-        this.gread = gread;
+    public void setTclass(String tclass) {
+        this.tclass = tclass;
     }
 
     public String getCommand() {
@@ -40,5 +43,13 @@ public class Teach {
 
     public void setCommand(String command) {
         this.command = command;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 }
