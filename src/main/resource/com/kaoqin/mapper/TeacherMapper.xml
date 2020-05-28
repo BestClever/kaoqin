@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kaoqin.mapper.TeacherMapper">
+
+    <select id="listAllInfo" resultType="com.kaoqin.vo.CourseinfoVO" parameterType="com.kaoqin.vo.CourseinfoVO">
+		SELECT
+		t.teacher_no,
+		t.teacher_name,
+		d.college,
+		d.professional,
+		d.grade,
+		c.course_name,
+		c.course_no,
+		c.coursse_password
+		FROM
+		t_sys_teacher t
+		LEFT JOIN t_sys_teach tc ON t.teacher_no = tc.teacher_no
+		LEFT JOIN t_sys_courseinfo c ON tc.course_no = c.course_no
+		LEFT JOIN t_sys_dept d ON c.dept_id = d.dept_id
+		<where>
+			<if test="teacherNo!='' and teacherNo!=null">
+				t.teacher_no = #{teacherNo,jdbcType=VARCHAR}
+			</if>
+		</where>
+    </select>
+
+	<select id="updateVommand" parameterType="com.kaoqin.vo.CourseinfoVO">
+		UPDATE t_sys_courseinfo SET coursse_password = #{coursePassword,jdbcType=VARCHAR} WHERE course_no = #{courseNo,jdbcType=VARCHAR}
+
+	</select>
+
+	<select id="getAttendance" resultType="com.kaoqin.vo.CourseinfoVO" parameterType="com.kaoqin.vo.CourseinfoVO">
+		SELECT
+				s.student_no,
+				s.student_name,
+				d.college,
+				d.professional,
+				d.grade,
+				t1.teacher_name,
+				c.course_name,
+				c.course_no,
+				c.course_password,
+				a.attendance_no,
+				a.attendance_memo
+        FROM
+ 			 t_sys_student s
+        LEFT JOIN t_sys_take t ON s.student_no = t.student_no
+        LEFT JOIN t_sys_course c ON t.course_no = c.course_no
+        LEFT JOIN t_sys_teach t1 ON c.course_no = t1.course_no
+        LEFT JOIN t_sys_dept d ON s.dept_id = d.dept_id
+		LEFT JOIN t_sys_attendance a ON a.student_no = c.course_no AND a.coruse_no = c.course_no
+		<where>
+			<if test="courseName!='' and courseName!=null">
+				c.course_name = #{courseName,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+
+	<select id="getOne" resultType="com.kaoqin.vo.TeacherVO" parameterType="com.kaoqin.vo.StudentVO">
+		select * from  t_sys_teacher
+		<where>
+			teacher_no = #{studentNo ,jdbcType=VARCHAR}
+		</where>
+	</select>
+
+	<insert id="saveStudent" parameterType="com.kaoqin.domain.Teacher">
+		INSERT INTO  t_sys_teacher (teacher_no, teacher_name, password,  dept_id) VALUES (
+    #{teacherNo},#{teacherName},#{password},#{deptId}
+    )
+	</insert>
+
+</mapper>

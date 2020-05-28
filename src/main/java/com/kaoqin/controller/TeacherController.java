@@ -26,6 +26,7 @@ public class TeacherController {
     private TeacherService service;
 
 
+
 //    @RequestMapping(/s)
 //    public ResultInfo getslogin(){
 //
@@ -40,4 +41,32 @@ public class TeacherController {
 
 
     }
+    @RequestMapping("/lists")
+    @ResponseBody
+    public DataGridResultInfo getTechers(CourseinfoVO courseinfoVO){
+        PageWrapper pageInfo =   service.getAttendance(courseinfoVO);
+
+        return ResultDataUtil.createQueryResult(pageInfo);
+
+
+    }
+
+
+
+    @RequestMapping("/confirmClock")
+    public ResultInfo confirmClock(CourseinfoVO courseinfoVO){
+        //设置考勤口令
+        service.confirmClock(courseinfoVO);
+
+        return ResultDataUtil.createFail(CommonEnum.SUCCESS);
+
+
+    }
+    @RequestMapping("/change")
+    public ResultInfo chage(CourseinfoVO courseinfoVO){
+//        service.chageAttendance();
+        return ResultDataUtil.createFail(CommonEnum.SUCCESS);
+
+    }
+
 }
