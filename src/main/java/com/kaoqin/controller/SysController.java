@@ -29,6 +29,16 @@ public class SysController {
         return "/studentIndex";
     }
 
+    @RequestMapping(value = "/toAttendanceStudent")
+    public String attendancIndex(){
+        return "/attendancStudentIndex";
+    }
+
+    @RequestMapping(value = "/basicStudnetInfo")
+    public String basicStudnetInfo(){
+        return "/basicStudnetInfo";
+    }
+
     @RequestMapping(value = "/logout")
     public String logout(HttpServletRequest request){
         //移除 session

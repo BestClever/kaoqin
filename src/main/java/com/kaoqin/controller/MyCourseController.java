@@ -26,6 +26,7 @@ public class MyCourseController {
     @Autowired
     private MyCourseService myCourseService;
 
+
     @RequestMapping(value = "/list")
     @ResponseBody
     public DataGridResultInfo list(MyCourseVo myCourseVo) {
@@ -34,11 +35,12 @@ public class MyCourseController {
     }
 
     @RequestMapping(value = "/confirmClock")
+    @ResponseBody
     public ResultInfo confirmClock(MyCourseVo myCourseVo) {
         //比对 是否 口令正确
         int i = myCourseService.selectPasswordByCourseNo(myCourseVo);
         if (i < 0) {
-           return ResultDataUtil.createFail(CommonEnum.CONFIRMCLOCK_FAILUER);
+            return ResultDataUtil.createFail(CommonEnum.CONFIRMCLOCK_FAILUER);
         }
         //在考勤表中新增一条数据
         return ResultDataUtil.createSuccess(CommonEnum.CONFIRMCLOCK_SUCCESS);

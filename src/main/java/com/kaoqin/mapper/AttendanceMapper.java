@@ -1,6 +1,9 @@
 package com.kaoqin.mapper;
 
 import com.kaoqin.vo.AttendanceVo;
+import com.kaoqin.vo.MyCourseVo;
+
+import java.util.List;
 
 /**
  * @author BestClever
@@ -11,5 +14,9 @@ import com.kaoqin.vo.AttendanceVo;
  */
 public interface AttendanceMapper {
 
-    int saveAttendance(AttendanceVo attendanceVo);
+    int selectAttendanceByCondition(MyCourseVo myCourseVo);
+
+    void saveAttendance(AttendanceVo attendanceVo);
+
+    List<AttendanceVo> selectListStudentInfo(AttendanceVo attendanceVo);
 }

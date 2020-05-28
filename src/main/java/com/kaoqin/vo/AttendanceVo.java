@@ -14,6 +14,9 @@ public class AttendanceVo {
     private String coruseNo;
     private String attendanceMemo;
 
+    private int page=1;//代表当前页码
+    private int limit=10;//代表每页数据量
+
     public String getAttendanceNo() {
         return attendanceNo;
     }
@@ -52,5 +55,21 @@ public class AttendanceVo {
 
     public void setAttendanceMemo(String attendanceMemo) {
         this.attendanceMemo = attendanceMemo;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
     }
 }
