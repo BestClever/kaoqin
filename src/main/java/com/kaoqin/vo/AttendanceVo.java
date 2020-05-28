@@ -13,6 +13,15 @@ public class AttendanceVo {
     private String studentName;
     private String coruseNo;
     private String attendanceMemo;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getAttendanceNo() {
         return attendanceNo;

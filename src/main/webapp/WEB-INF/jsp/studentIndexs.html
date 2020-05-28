@@ -60,6 +60,10 @@
 <!--操作-->
 <script type="text/html" id="tableTool">
     <a class="layui-btn layui-btn-xs" lay-event="clock">修改考勤</a>
+    <a class="layui-btn layui-btn-xs" lay-event="clock1">修改学生密码</a>
+    <a class="layui-btn layui-btn-xs" lay-event="clock2">修改账户</a>
+
+
 </script>
 <script src="lib/layui/layui.js" charset="utf-8"></script>
 <script>
@@ -113,17 +117,41 @@
                 case "clock":
                     clock(data);
                     break;
+                case "clock1":
+                    clock1(data);
+                    break;
+                case "clock2":
+                    clock3(data);
+                    break;
+
             }
         });
         
         function clock(data) {
-            layer.prompt({title: '请输入修改的考勤信息', formType: 1}, function(text, index){
+            layer.prompt({title: '请输入修改的考勤信息', formType: 3}, function(text, index){
                 layer.close(index);
-                $.post('myCourse/confirmClock',{attendanceMemo:text,},function (result) {
+                $.post('teacher/upstudents',{'attendanceMemo':text, 'attendanceNo':data.attendanceNo},function (result) {
 
                 });
             });
         }
+        function clock1(data) {
+            layer.prompt({title: '请输入修改的学生密码', formType: 3}, function(text, index){
+                layer.close(index);
+                $.post('teacher/upstudents',{'password':text,'studentNo':data.studentNo},function (result) {
+
+                });
+            });
+        }
+        function clock2(data) {
+            layer.prompt({title: '请输入修改的学生账户', formType: 3}, function(text, index){
+                layer.close(index);
+                $.post('teacher/upstudents',{studentNo:text,'studentNo':data.studentNo},function (result) {
+
+                });
+            });
+        }
+
     });
 </script>
 </body>

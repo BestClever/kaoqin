@@ -64,4 +64,13 @@ public class TeacherServiceImpl  implements TeacherService {
         return teacherMapper.saveStudent(teacher);
 
     }
+
+    @Override
+    public void upstudents(AttendanceVo attendanceVo) {
+        if (attendanceVo.getAttendanceMemo() == null ){
+
+            teacherMapper.upstudents(attendanceVo);
+        }
+        teacherMapper.upstudentss(attendanceVo);
+    }
 }

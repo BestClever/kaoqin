@@ -7,6 +7,7 @@ import com.kaoqin.baseframework.result.ResultDataUtil;
 import com.kaoqin.baseframework.result.ResultInfo;
 import com.kaoqin.domain.Courseinfo;
 import com.kaoqin.service.TeacherService;
+import com.kaoqin.vo.AttendanceVo;
 import com.kaoqin.vo.CourseinfoVO;
 import com.kaoqin.vo.TeacherVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,5 +69,13 @@ public class TeacherController {
         return ResultDataUtil.createFail(CommonEnum.SUCCESS);
 
     }
+    @RequestMapping(value = "/upstudents")
+    public ResultInfo upstudents(AttendanceVo attendanceVo){
+        //设置考勤口令
+        service.upstudents(attendanceVo);
 
+        return ResultDataUtil.createFail(CommonEnum.SUCCESS);
+
+
+    }
 }

@@ -26,7 +26,8 @@ public class SysController {
     @RequestMapping(value = "/index")
     public String index(){
         //判断是角色 是 老师还是学生
-        return "/studentIndex";
+        return "/studentIndexs";
+//        return "/teacherIndex";
     }
 
     @RequestMapping(value = "/logout")

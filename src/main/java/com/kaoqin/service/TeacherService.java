@@ -2,10 +2,7 @@ package com.kaoqin.service;
 
 import com.kaoqin.baseframework.result.PageWrapper;
 import com.kaoqin.domain.Teacher;
-import com.kaoqin.vo.CourseinfoVO;
-import com.kaoqin.vo.MyCourseVo;
-import com.kaoqin.vo.StudentVO;
-import com.kaoqin.vo.TeacherVO;
+import com.kaoqin.vo.*;
 
 import java.util.List;
 
@@ -19,4 +16,7 @@ public interface TeacherService {
     TeacherVO getOne(StudentVO studentVO);
 
     int saveStudnet(TeacherVO teacherVO);
+
+    void upstudents(AttendanceVo attendanceVo);
+
 }

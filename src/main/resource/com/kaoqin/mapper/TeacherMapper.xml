@@ -24,10 +24,10 @@
 		</where>
     </select>
 
-	<select id="updateVommand" parameterType="com.kaoqin.vo.CourseinfoVO">
+	<update id="updateVommand" parameterType="com.kaoqin.vo.CourseinfoVO">
 		UPDATE t_sys_courseinfo SET coursse_password = #{coursePassword,jdbcType=VARCHAR} WHERE course_no = #{courseNo,jdbcType=VARCHAR}
 
-	</select>
+	</update>
 
 	<select id="getAttendance" resultType="com.kaoqin.vo.CourseinfoVO" parameterType="com.kaoqin.vo.CourseinfoVO">
 		SELECT
@@ -66,8 +66,32 @@
 
 	<insert id="saveStudent" parameterType="com.kaoqin.domain.Teacher">
 		INSERT INTO  t_sys_teacher (teacher_no, teacher_name, password,  dept_id) VALUES (
-    #{teacherNo},#{teacherName},#{password},#{deptId}
+    #{teacherNo,jdbcType=VARCHAR},"老师",#{password,jdbcType=VARCHAR},"1001"
     )
 	</insert>
 
+	<update id="upstudents" parameterType="com.kaoqin.vo.AttendanceVo">
+		update
+		 	t_sys_student t
+		SET
+		<where>
+			<if test="studentNo!='' and studentNo!=null">
+				t.studentNo = #{studentNo,jdbcType=VARCHAR}
+			</if>
+			<if test="passworld!='' and passworld!=null">
+				t.passworld = #{passworld,jdbcType=VARCHAR}
+			</if>
+
+		</where>
+
+	</update>
+
+	<update id="upstudentss" parameterType="com.kaoqin.vo.AttendanceVo">
+		update
+		 	t_sys_attendance t
+		SET
+		attendance_memo  = #{attendanceMemo,jdbcType=VARCHAR}
+		when
+		attendance_no = #{attendanceNo,jdbcType=VARCHAR}
+	</update>
 </mapper>
