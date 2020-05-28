@@ -24,7 +24,7 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> 王越
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> <span id="username">王越</span>
                 </a>
                 <dl class="layui-nav-child">
                     <dd>
@@ -33,38 +33,56 @@
                 </dl>
             </li>
             <li class="layui-nav-item">
-                <a href="">退了</a>
+                <a href="logout">退了</a>
             </li>
         </ul>
     </div>
     <div>
+        <div class="layui-row">
+            <form class="layui-form layui-col-md12 ok-search">
+                <input class="layui-input" placeholder="请输入课程名" autocomplete="off" name="name">
+                <button class="layui-btn" lay-submit lay-filter="search">
+                    <i class="layui-icon layui-icon-search"></i>
+                </button>
+            </form>
+        </div>
+
         <table class="layui-hide" id="myCourse" lay-filter="dataTable"></table>
     </div>
 </div>
 <script src="lib/layui/layui.js" charset="utf-8"></script>
 <script>
     //JavaScript代码区域
-    layui.use(['element','table','form'], function () {
+    layui.use(['element', 'table', 'form'], function () {
         var element = layui.element;
         table = layui.table,
-        form = layui.form;
+            form = layui.form;
 
-        table.render({
-            elem: '#test'
-            ,url:'table01.json'
-            ,cols: [[
-                 {field:'id', width:80, title: 'ID', sort: true}
-                ,{field:'username', width:80, title: '用户名'}
-                ,{field:'sex', width:80, title: '性别', sort: true}
-                ,{field:'city', width:80, title: '城市'}
-                ,{field:'sign', title: '签名', minWidth: 150}
-                ,{field:'experience', width:80, title: '积分', sort: true}
-                ,{field:'score', width:80, title: '评分', sort: true}
-                ,{field:'classify', width:80, title: '职业'}
-                ,{field:'wealth', width:135, title: '财富', sort: true}
-                ,{title: '操作', width: 150,templet: '#tableTool',fixed: "right", align: "center"}
+        var myCourseTalbe = table.render({
+            elem: '#myCourse'
+            , url: 'myCourse/list'
+            , cols: [[
+                {field: 'studentNo',  title: '学号', sort: true}
+                , {field: 'studentName',  title: '学生姓名'}
+                , {field: 'courseNo', title: '课程编号', sort: true}
+                , {field: 'courseName',  title: '课程名称'}
+                , {field: 'teacherName', title: '老师名称', minWidth: 150}
+                , {field: 'coursePassword',  title: '课程口令', sort: true}
+                , {field: 'college',  title: '学院', sort: true}
+                , {field: 'professional', title: '专业'}
+                , {field: 'grade', title: '班级', sort: true}
+                , {title: '操作', templet: '#tableTool', fixed: "right", align: "center"}
             ]]
-            ,page: true
+            , page: true
+        });
+
+        form.on("submit(search)", function (data) {
+            myCourseTalbe.reload({
+                where: data.field,
+                page: {curr: 1}
+            });
+            console.log("0000")
+            return false;
         });
     });
 </script>

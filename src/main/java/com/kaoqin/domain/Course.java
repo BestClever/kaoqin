@@ -11,6 +11,15 @@ public class Course {
     private String courseNo;
     private String courseName;
     private String courssePassword;
+    private String deptId;
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
 
     public String getCourseNo() {
         return courseNo;

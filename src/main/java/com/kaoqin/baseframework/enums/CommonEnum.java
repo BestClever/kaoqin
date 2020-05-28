@@ -18,12 +18,17 @@ public enum CommonEnum implements BaseInfoInterface {
 	NOT_FOUND(404, "未找到该资源!"),
 	INTERNAL_SERVER_ERROR(500, "服务器内部错误!"),
 	SERVER_BUSY(503,"服务器正忙，请稍后再试!"),
+    ARITHMETIC_ERROR(1100,"数学运算错误!"),
+
+
 	LOGIN_SUCCESS(9001,"登录成功！"),
 	LOGIN_FAILURE(9051,"登录失败"),
 
 	LOGOUT_SUCCESS(9101,"退出成功！"),
 	LOGOUT_FAILURE(9151,"退出失败！"),
-	ARITHMETIC_ERROR(1100,"数学运算错误!"),
+
+
+    COURSE_SELECT_SUCESS(2011,"我的课程查询成功！"),
 
 
 	not_exist_user(2000,"用户名或密码错误")

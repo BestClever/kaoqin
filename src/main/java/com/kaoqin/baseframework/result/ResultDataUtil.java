@@ -6,8 +6,6 @@ package com.kaoqin.baseframework.result;
 import com.kaoqin.baseframework.exception.BaseInfoInterface;
 import com.kaoqin.baseframework.exception.BizException;
 
-import java.util.List;
-
 /**
  *  ResponseDataUtil:返回的工具类,主要是方便返回的写法
  *  * 单纯的返回工具类,直接放在这个包
@@ -46,7 +44,7 @@ public class ResultDataUtil {
      * @param pageInfo
      * @return
      */
-    public static DataGridResultInfo createQueryResult(PageInfo pageInfo){
+    public static DataGridResultInfo createQueryResult(PageWrapper pageInfo){
         return new DataGridResultInfo(pageInfo.getTotal(),pageInfo.getList());
     }
 

@@ -12,8 +12,45 @@ public class Teach {
     private String teacherName;
     private String courseNo;
     private String courseName;
-    private String grade;
-    private String college;
-    private String professional;
+    private String deptId;
 
+    public String getTeacherNo() {
+        return teacherNo;
+    }
+
+    public void setTeacherNo(String teacherNo) {
+        this.teacherNo = teacherNo;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public String getCourseNo() {
+        return courseNo;
+    }
+
+    public void setCourseNo(String courseNo) {
+        this.courseNo = courseNo;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
 }

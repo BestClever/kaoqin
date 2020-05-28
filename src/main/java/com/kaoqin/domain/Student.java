@@ -11,9 +11,7 @@ public class Student {
     private String studentNo;
     private String studentName;
     private String password;
-    private String college;
-    private String professional;
-    private String grade;
+    private String deptId;
 
     public String getStudentNo() {
         return studentNo;
@@ -39,27 +37,11 @@ public class Student {
         this.password = password;
     }
 
-    public String getCollege() {
-        return college;
+    public String getDeptId() {
+        return deptId;
     }
 
-    public void setCollege(String college) {
-        this.college = college;
-    }
-
-    public String getProfessional() {
-        return professional;
-    }
-
-    public void setProfessional(String professional) {
-        this.professional = professional;
-    }
-
-    public String getGrade() {
-        return grade;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
     }
 }

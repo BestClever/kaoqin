@@ -2,31 +2,22 @@ package com.kaoqin.vo;
 
 /**
  * @author BestClever
- * @title: StudentVO
+ * @title: SysUser
  * @projectName kaoqin
  * @description: TODO
- * @date 2020-05-27 17:00
+ * @date 2020-05-28 11:01
  */
-public class StudentVO {
-    private String studentNo;
-    private String studentName;
+public class SysUser {
+    private String userName;
     private String password;
     private String deptId;
 
-    public String getStudentNo() {
-        return studentNo;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setStudentNo(String studentNo) {
-        this.studentNo = studentNo;
-    }
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {

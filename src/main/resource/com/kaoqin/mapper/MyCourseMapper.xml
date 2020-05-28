@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kaoqin.mapper.MyCourseMapper">
+
+    <select id="listAllInfo" resultType="com.kaoqin.vo.MyCourseVo" parameterType="com.kaoqin.vo.MyCourseVo">
+        SELECT
+		s.student_no,
+		s.student_name,
+		d.college,
+		d.professional,
+		d.grade,
+		t1.teacher_name,
+		c.course_name,
+		c.course_no,
+		c.course_password
+		FROM
+			t_sys_student s
+			LEFT JOIN t_sys_take t ON s.student_no = t.student_no
+			LEFT JOIN t_sys_course c ON t.course_no = c.course_no
+			LEFT JOIN t_sys_teach t1 ON c.course_no = t1.course_no
+			LEFT JOIN t_sys_dept d ON s.dept_id = d.dept_id
+		<where>
+			<if test="courseName!='' and courseName!=null">
+				c.course_name = #{courseName,jdbcType=VARCHAR}
+			</if>
+		</where>
+    </select>
+
+</mapper>

@@ -9,7 +9,7 @@ import java.util.List;
  * @description: TODO
  * @date 2020-02-18 14:06
  */
-public class PageInfo {
+public class PageWrapper {
 
     private Long total;
 

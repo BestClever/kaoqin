@@ -9,15 +9,34 @@ package com.kaoqin.vo;
  */
 public class MyCourseVo {
 
+    private String studentNo;
     private String studentName;
     private String courseNo;
     private String courseName;
-    private String studentNo;
     private String teacherName;
-    private String courssePassword;
+    private String coursePassword;
     private String college;
     private String professional;
     private String grade;
+
+    private int page=1;//代表当前页码
+    private int limit=10;//代表每页数据量
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
 
     public String getStudentNo() {
         return studentNo;
@@ -59,12 +78,12 @@ public class MyCourseVo {
         this.courseName = courseName;
     }
 
-    public String getCourssePassword() {
-        return courssePassword;
+    public String getCoursePassword() {
+        return coursePassword;
     }
 
-    public void setCourssePassword(String courssePassword) {
-        this.courssePassword = courssePassword;
+    public void setCoursePassword(String coursePassword) {
+        this.coursePassword = coursePassword;
     }
 
     public String getCollege() {

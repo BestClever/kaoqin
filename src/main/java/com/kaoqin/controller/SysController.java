@@ -29,4 +29,9 @@ public class SysController {
         return "/studentIndex";
     }
 
+    @RequestMapping(value = "/logout")
+    public String logout(){
+        return "/login";
+    }
+
 }
