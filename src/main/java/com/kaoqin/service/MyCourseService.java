@@ -16,4 +16,6 @@ import java.util.List;
 public interface MyCourseService {
 
     PageWrapper listAllInfo(MyCourseVo myCourseVo);
+
+    int selectPasswordByCourseNo(MyCourseVo myCourseVo);
 }

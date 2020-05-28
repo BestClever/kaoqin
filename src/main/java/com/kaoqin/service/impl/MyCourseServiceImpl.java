@@ -34,4 +34,9 @@ public class MyCourseServiceImpl implements MyCourseService {
         pageWrapper.setList(pageInfo.getList());
         return pageWrapper;
     }
+
+    @Override
+    public int selectPasswordByCourseNo(MyCourseVo myCourseVo) {
+        return myCourseMapper.selectPasswordByCourseNo(myCourseVo);
+    }
 }

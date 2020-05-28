@@ -1,6 +1,5 @@
 package com.kaoqin.controller;
 
-import com.github.pagehelper.PageInfo;
 import com.kaoqin.baseframework.enums.CommonEnum;
 import com.kaoqin.baseframework.result.DataGridResultInfo;
 import com.kaoqin.baseframework.result.PageWrapper;
@@ -12,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 /**
  * @author BestClever
@@ -31,8 +28,19 @@ public class MyCourseController {
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public DataGridResultInfo list(MyCourseVo myCourseVo){
+    public DataGridResultInfo list(MyCourseVo myCourseVo) {
         PageWrapper pageInfo = myCourseService.listAllInfo(myCourseVo);
         return ResultDataUtil.createQueryResult(pageInfo);
+    }
+
+    @RequestMapping(value = "/confirmClock")
+    public ResultInfo confirmClock(MyCourseVo myCourseVo) {
+        //比对 是否 口令正确
+        int i = myCourseService.selectPasswordByCourseNo(myCourseVo);
+        if (i < 0) {
+           return ResultDataUtil.createFail(CommonEnum.CONFIRMCLOCK_FAILUER);
+        }
+        //在考勤表中新增一条数据
+        return ResultDataUtil.createSuccess(CommonEnum.CONFIRMCLOCK_SUCCESS);
     }
 }

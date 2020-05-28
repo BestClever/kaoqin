@@ -37,9 +37,12 @@ public enum CommonEnum implements BaseInfoInterface {
     REGISTER_FAILUER_TEACHER(9212, "老师注册失败！"),
     REGISTER_FAILUER(9251, "注册失败！"),
 
+    /**/
 
     COURSE_SELECT_SUCESS(2011, "我的课程查询成功！"),
+    CONFIRMCLOCK_SUCCESS(2101,"打卡成功"),
 
+    CONFIRMCLOCK_FAILUER(2151,"打卡失败"),
 
     NOT_EXIST_USER(2000, "用户名或密码错误");
 

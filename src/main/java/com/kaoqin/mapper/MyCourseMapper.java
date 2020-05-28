@@ -14,4 +14,11 @@ import java.util.List;
 public interface MyCourseMapper {
 
     List<MyCourseVo> listAllInfo(MyCourseVo myCourseVo);
+
+    /**
+     * 根据 课程号 和 口令查询结果
+     * @param myCourseVo
+     * @return
+     */
+    int selectPasswordByCourseNo(MyCourseVo myCourseVo);
 }
