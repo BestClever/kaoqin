@@ -1,11 +1,15 @@
 package com.kaoqin.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.kaoqin.baseframework.result.PageWrapper;
 import com.kaoqin.domain.Courseinfo;
 import com.kaoqin.domain.Teach;
 import com.kaoqin.domain.Teacher;
 import com.kaoqin.mapper.TeacherMapper;
 import com.kaoqin.service.TeacherService;
 import com.kaoqin.vo.CourseinfoVO;
+import com.kaoqin.vo.MyCourseVo;
 import com.kaoqin.vo.TeachVO;
 import com.kaoqin.vo.TeacherVO;
 import com.sun.org.apache.bcel.internal.generic.NEW;
@@ -20,13 +24,15 @@ import java.util.Map;
 public class TeacherServiceImpl  implements TeacherService {
     @Autowired
     private TeacherMapper teacherMapper;
+
     @Override
-    public  List<CourseinfoVO> getTeachList(String teacherNo) {
-
-        CourseinfoVO courseinfo = new CourseinfoVO();
-        List<CourseinfoVO> mapList =  teacherMapper.getTeachList(teacherNo);
-
-
-        return mapList;
+    public PageWrapper listAllInfo(CourseinfoVO courseinfoVO) {
+        PageHelper.startPage(courseinfoVO.getPage(),courseinfoVO.getLimit());
+        List<CourseinfoVO> courseinfoVOS = teacherMapper.listAllInfo(courseinfoVO);
+        PageInfo<CourseinfoVO> pageInfo = new PageInfo<>(courseinfoVOS);
+        PageWrapper pageWrapper = new PageWrapper();
+        pageWrapper.setTotal(pageInfo.getTotal());
+        pageWrapper.setList(pageInfo.getList());
+        return pageWrapper;
     }
 }

@@ -12,7 +12,6 @@ public class TeachVO {
     private String command;
     private String  courseName;
 
-
     public String getTeacherNo() {
         return teacherNo;
     }
