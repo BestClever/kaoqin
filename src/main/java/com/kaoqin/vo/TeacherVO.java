@@ -10,9 +10,18 @@ public class TeacherVO {
     private String teacherName;
     private String courseName;
     private CourseinfoVO courseinfoVO;
+    private String password;
+    private String deptId;
     private int page=1;//代表当前页码
     private int limit=10;//代表每页数据量
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getTeacherNo() {
         return teacherNo;
@@ -44,5 +53,29 @@ public class TeacherVO {
 
     public void setCourseinfoVO(CourseinfoVO courseinfoVO) {
         this.courseinfoVO = courseinfoVO;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
     }
 }

@@ -11,13 +11,21 @@ public class CourseinfoVO   {
     private String courseNo;
     private String courseName;
     private String teacherName;
-    private String coursePassword;
+    private String courssePassword;
     private String college;
     private String professional;
     private String grade;
+    private String attendanceMemo;
     private int page=1;//代表当前页码
     private int limit=10;//代表每页数据量
 
+    public String getAttendanceMemo() {
+        return attendanceMemo;
+    }
+
+    public void setAttendanceMemo(String attendanceMemo) {
+        this.attendanceMemo = attendanceMemo;
+    }
 
     public int getPage() {
         return page;
@@ -67,12 +75,12 @@ public class CourseinfoVO   {
         this.teacherName = teacherName;
     }
 
-    public String getCoursePassword() {
-        return coursePassword;
+    public String getCourssePassword() {
+        return courssePassword;
     }
 
-    public void setCoursePassword(String coursePassword) {
-        this.coursePassword = coursePassword;
+    public void setCourssePassword(String courssePassword) {
+        this.courssePassword = courssePassword;
     }
 
     public String getCollege() {

@@ -7,6 +7,7 @@ import com.kaoqin.baseframework.result.ResultDataUtil;
 import com.kaoqin.baseframework.result.ResultInfo;
 import com.kaoqin.domain.Courseinfo;
 import com.kaoqin.service.TeacherService;
+import com.kaoqin.vo.AttendanceVo;
 import com.kaoqin.vo.CourseinfoVO;
 import com.kaoqin.vo.TeacherVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class TeacherController {
     private TeacherService service;
 
 
+
 //    @RequestMapping(/s)
 //    public ResultInfo getslogin(){
 //
@@ -37,6 +39,42 @@ public class TeacherController {
         PageWrapper pageInfo =   service.listAllInfo(courseinfoVO);
 
         return ResultDataUtil.createQueryResult(pageInfo);
+
+
+    }
+    @RequestMapping("/lists")
+    @ResponseBody
+    public DataGridResultInfo getTechers(CourseinfoVO courseinfoVO){
+        PageWrapper pageInfo =   service.getAttendance(courseinfoVO);
+
+        return ResultDataUtil.createQueryResult(pageInfo);
+
+
+    }
+
+
+
+    @RequestMapping("/confirmClock")
+    public ResultInfo confirmClock(CourseinfoVO courseinfoVO){
+        //设置考勤口令
+        service.confirmClock(courseinfoVO);
+
+        return ResultDataUtil.createFail(CommonEnum.SUCCESS);
+
+
+    }
+    @RequestMapping("/change")
+    public ResultInfo chage(CourseinfoVO courseinfoVO){
+//        service.chageAttendance();
+        return ResultDataUtil.createFail(CommonEnum.SUCCESS);
+
+    }
+    @RequestMapping(value = "/upstudents")
+    public ResultInfo upstudents(AttendanceVo attendanceVo){
+        //设置考勤口令
+        service.upstudents(attendanceVo);
+
+        return ResultDataUtil.createFail(CommonEnum.SUCCESS);
 
 
     }

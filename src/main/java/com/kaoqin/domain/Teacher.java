@@ -11,6 +11,8 @@ public class Teacher {
     private String teacherNo;
     private String teacherName;
     private String courseName;
+    private String password;
+    private String deptId;
 
     public String getTeacherNo() {
         return teacherNo;
@@ -36,5 +38,19 @@ public class Teacher {
         this.courseName = courseName;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
 }

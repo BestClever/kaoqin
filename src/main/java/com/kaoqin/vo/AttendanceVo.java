@@ -13,6 +13,15 @@ public class AttendanceVo {
     private String studentName;
     private String coruseNo;
     private String attendanceMemo;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     private int page=1;//代表当前页码
     private int limit=10;//代表每页数据量
