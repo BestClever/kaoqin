@@ -2,15 +2,24 @@ package com.kaoqin.domain;
 
 /**
  * @author BestClever
- * @title: Course
+ * @title: Take
  * @projectName kaoqin
- * @description: 课程实体类
- * @date 2020-05-28 01:45
+ * @description: 选课 实体类
+ * @date 2020-05-28 08:50
  */
-public class Course {
+public class Take {
+
+    private String studentNo;
     private String courseNo;
     private String courseName;
-    private String courssePassword;
+
+    public String getStudentNo() {
+        return studentNo;
+    }
+
+    public void setStudentNo(String studentNo) {
+        this.studentNo = studentNo;
+    }
 
     public String getCourseNo() {
         return courseNo;
@@ -26,13 +35,5 @@ public class Course {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
-    }
-
-    public String getCourssePassword() {
-        return courssePassword;
-    }
-
-    public void setCourssePassword(String courssePassword) {
-        this.courssePassword = courssePassword;
     }
 }

@@ -33,10 +33,13 @@ public class LoginController {
         if (ObjectUtil.isEmpty(one)) {
             return ResultDataUtil.createFail(CommonEnum.not_exist_user);
         }
-        return ResultDataUtil.createSuccess(CommonEnum.SUCCESS);
+        return ResultDataUtil.createSuccess(CommonEnum.LOGIN_SUCCESS);
     }
 
 
+    public ResultInfo logout(){
+        return ResultDataUtil.createSuccess(CommonEnum.LOGOUT_SUCCESS);
+    }
 
 
 }
