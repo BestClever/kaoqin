@@ -51,8 +51,9 @@ public class LoginController {
 
 
             //教师 查询数据库
-            return ResultDataUtil.createSuccess(CommonEnum.LOGIN_SUCCESS_TEACHER);
+            return ResultDataUtil.createSuccess(CommonEnum.LOGIN_SUCCESS_STUDENT);
         } else if (StrUtil.equals("2", studentVO.getRole())) {
+
             StudentVO one = studentService.getOne(studentVO);
             if (ObjectUtil.isEmpty(one)) {
                 return ResultDataUtil.createFail(CommonEnum.NOT_EXIST_USER);
@@ -89,6 +90,7 @@ public class LoginController {
             }
 
         } else if (StrUtil.equals("2", studentVO.getRole())) {
+
 
             StudentVO one = studentService.getOne(studentVO);
             if (ObjectUtil.isNotEmpty(one)) {

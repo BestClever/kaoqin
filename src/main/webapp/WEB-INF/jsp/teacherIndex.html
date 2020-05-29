@@ -14,16 +14,16 @@
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
             <li class="layui-nav-item">
-                <a href="index">我的课程</a>
+                <a href="teacher">我的课程</a>
             </li>
             <li class="layui-nav-item">
-                <a href="">考勤信息</a>
+                <a href="indexs">考勤信息</a>
             </li>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> <span id="username">王越</span>
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> <span id="username">张云飞</span>
                 </a>
                 <dl class="layui-nav-child">
                     <dd>
@@ -101,14 +101,14 @@
             , page: true
         });
 
-        form.on("submit(search)", function (data) {
-            myCourseTalbe.reload({
-                where: data.field,
-                page: {curr: 1}
-            });
-            console.log("0000")
-            return false;
-        });
+        // form.on("submit(search)", function (data) {
+        //     myCourseTalbe.reload({
+        //         where: data.field,
+        //         page: {curr: 1}
+        //     });
+        //     console.log("0000")
+        //     return false;
+        // });
         table.on("tool(dataTable)", function (obj) {
             var data = obj.data;
             switch (obj.event) {
@@ -123,7 +123,7 @@
             layer.prompt({title: '请设置口令', formType: 3}, function(text, index){
                 console.log(text);
                 console.log("s",data)
-                $.post('teacher/confirmClock',{'coursePassword':text,'courseNo':data.courseNo},function (result) {
+                $.post('teacher/confirmClock',{'courssePassword':text,'courseNo':data.courseNo},function (result) {
 
                 });
                 layer.close(index);

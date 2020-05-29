@@ -18,18 +18,18 @@
 		LEFT JOIN t_sys_courseinfo c ON tc.course_no = c.course_no
 		LEFT JOIN t_sys_dept d ON c.dept_id = d.dept_id
 		<where>
-			<if test="teacherNo!='' and teacherNo!=null">
-				t.teacher_no = #{teacherNo,jdbcType=VARCHAR}
+			<if test="teacherName!='' and teacherName!=null">
+				t.teacher_name = #{teacherName,jdbcType=VARCHAR}
 			</if>
 		</where>
     </select>
 
 	<update id="updateVommand" parameterType="com.kaoqin.vo.CourseinfoVO">
-		UPDATE t_sys_courseinfo SET coursse_password = #{coursePassword,jdbcType=VARCHAR} WHERE course_no = #{courseNo,jdbcType=VARCHAR}
+		UPDATE t_sys_courseinfo SET coursse_password = #{courssePassword,jdbcType=VARCHAR} WHERE course_no = #{courseNo,jdbcType=VARCHAR}
 
 	</update>
 
-	<select id="getAttendance" resultType="com.kaoqin.vo.CourseinfoVO" parameterType="com.kaoqin.vo.CourseinfoVO">
+	<select id="getAttendance" resultType="com.kaoqin.vo.AttendanceVo" parameterType="com.kaoqin.vo.AttendanceVo">
 		SELECT
 				s.student_no,
 				s.student_name,
@@ -39,13 +39,13 @@
 				t1.teacher_name,
 				c.course_name,
 				c.course_no,
-				c.course_password,
+				c.coursse_password,
 				a.attendance_no,
 				a.attendance_memo
         FROM
  			 t_sys_student s
         LEFT JOIN t_sys_take t ON s.student_no = t.student_no
-        LEFT JOIN t_sys_course c ON t.course_no = c.course_no
+        LEFT JOIN t_sys_courseinfo c ON t.course_no = c.course_no
         LEFT JOIN t_sys_teach t1 ON c.course_no = t1.course_no
         LEFT JOIN t_sys_dept d ON s.dept_id = d.dept_id
 		LEFT JOIN t_sys_attendance a ON a.student_no = c.course_no AND a.coruse_no = c.course_no

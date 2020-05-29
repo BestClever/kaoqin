@@ -20,4 +20,6 @@ public interface TeacherMapper {
     void upstudents(AttendanceVo attendanceVo);
 
     void upstudentss(AttendanceVo attendanceVo);
+
+    List<AttendanceVo> getAttendance(AttendanceVo courseinfoVO);
 }

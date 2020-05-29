@@ -26,8 +26,20 @@ public class SysController {
     @RequestMapping(value = "/index")
     public String index(){
         //判断是角色 是 老师还是学生
+//        return "/studentIndex";
+        return indexss();
+    }
+
+    @RequestMapping(value = "/indexs")
+    public String indexs(){
+        //判断是角色 是 老师还是学生
         return "/studentIndexs";
 //        return "/teacherIndex";
+    }
+    @RequestMapping(value = "/teacher")
+    public String indexss(){
+
+        return "/teacherIndex";
     }
 
     @RequestMapping(value = "/logout")
@@ -36,5 +48,6 @@ public class SysController {
         request.getSession().removeAttribute("loginUser");
         return "/login";
     }
+
 
 }

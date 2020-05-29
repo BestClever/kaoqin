@@ -40,12 +40,14 @@ public class TeacherServiceImpl  implements TeacherService {
         teacherMapper.updateVommand(courseinfoVO);
     }
 
+
+
     @Override
-    public PageWrapper getAttendance(CourseinfoVO courseinfoVO) {
+    public PageWrapper getAttendance(AttendanceVo courseinfoVO) {
 
         PageHelper.startPage(courseinfoVO.getPage(),courseinfoVO.getLimit());
-        List<CourseinfoVO> courseinfoVOS = teacherMapper.listAllInfo(courseinfoVO);
-        PageInfo<CourseinfoVO> pageInfo = new PageInfo<>(courseinfoVOS);
+        List<AttendanceVo> courseinfoVOS = teacherMapper.getAttendance(courseinfoVO);
+        PageInfo<AttendanceVo> pageInfo = new PageInfo<>(courseinfoVOS);
         PageWrapper pageWrapper = new PageWrapper();
         pageWrapper.setTotal(pageInfo.getTotal());
         pageWrapper.setList(pageInfo.getList());

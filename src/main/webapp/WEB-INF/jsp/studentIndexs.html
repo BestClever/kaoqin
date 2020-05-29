@@ -14,16 +14,16 @@
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
             <li class="layui-nav-item">
-                <a href="index">我的课程</a>
+                <a href="teacher">我的课程</a>
             </li>
             <li class="layui-nav-item">
-                <a href="">考勤信息</a>
+                <a href="indexs">考勤信息</a>
             </li>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> <span id="username">王越</span>
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> <span id="username">张云飞</span>
                 </a>
                 <dl class="layui-nav-child">
                     <dd>
@@ -83,7 +83,7 @@
 
         var myCourseTalbe = table.render({
             elem: '#myCourse'
-            , url: 'myCourse/list'
+            , url: 'teacher/lists'
             , cols: [[
                 {field: 'studentNo',  title: '学号', sort: true}
 
@@ -91,7 +91,7 @@
                 , {field: 'courseNo', title: '课程编号', sort: true}
                 , {field: 'courseName',  title: '课程名称'}
                 , {field: 'teacherName', title: '老师名称', minWidth: 150}
-                , {field: 'coursePassword',  title: '课程口令', sort: true}
+                , {field: 'courssePassword',  title: '课程口令', sort: true}
                 , {field: 'college',  title: '学院', sort: true}
                 , {field: 'professional', title: '专业'}
                 , {field: 'grade', title: '班级', sort: true}
@@ -102,14 +102,14 @@
             , page: true
         });
 
-        form.on("submit(search)", function (data) {
-            myCourseTalbe.reload({
-                where: data.field,
-                page: {curr: 1}
-            });
-            console.log("0000")
-            return false;
-        });
+        // form.on("submit(search)", function (data) {
+        //     myCourseTalbe.reload({
+        //         where: data.field,
+        //         page: {curr: 1}
+        //     });
+        //     console.log("0000")
+        //     return false;
+        // });
 
         table.on("tool(dataTable)", function (obj) {
             var data = obj.data;
