@@ -27,6 +27,6 @@
     </select>
 
 	<select id="selectPasswordByCourseNo" parameterType="com.kaoqin.vo.MyCourseVo" resultType="int">
-		select 1 from t_sys_course where course_no = #{courseNo} and coursse_password = #{coursePassword}
+		select count(1) from t_sys_course where course_no = #{courseNo} and course_password = #{coursePassword}
 	</select>
 </mapper>

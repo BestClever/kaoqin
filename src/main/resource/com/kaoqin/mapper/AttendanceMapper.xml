@@ -5,4 +5,12 @@
     <insert id="saveAttendance" parameterType="com.kaoqin.vo.AttendanceVo">
         insert into t_sys_attendance(attendance_no,student_no,student_name,coruse_no,attendance_memo) values(#{attendanceNo},#{studentNo},#{studentName},#{coruseNo},#{attendanceMemo});
     </insert>
+
+    <select id="selectListStudentInfo" parameterType="com.kaoqin.vo.AttendanceVo" resultType="com.kaoqin.vo.AttendanceVo">
+        select * from t_sys_attendance
+    </select>
+
+    <select id="selectAttendanceByCondition" parameterType="com.kaoqin.vo.MyCourseVo" resultType="int">
+        select count(1) from t_sys_attendance where student_no = #{studentNo} and coruse_no = #{courseNo}
+    </select>
 </mapper>

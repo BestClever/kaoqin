@@ -2,8 +2,11 @@ package com.kaoqin.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.kaoqin.baseframework.enums.CommonEnum;
 import com.kaoqin.baseframework.result.PageWrapper;
+import com.kaoqin.baseframework.result.ResultDataUtil;
 import com.kaoqin.mapper.MyCourseMapper;
+import com.kaoqin.service.MyAttendanceService;
 import com.kaoqin.service.MyCourseService;
 import com.kaoqin.vo.MyCourseVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +26,8 @@ public class MyCourseServiceImpl implements MyCourseService {
 
     @Autowired
     private MyCourseMapper myCourseMapper;
-
+    @Autowired
+    private MyAttendanceService myAttendanceService;
     @Override
     public PageWrapper listAllInfo(MyCourseVo myCourseVo) {
         PageHelper.startPage(myCourseVo.getPage(),myCourseVo.getLimit());
@@ -37,6 +41,18 @@ public class MyCourseServiceImpl implements MyCourseService {
 
     @Override
     public int selectPasswordByCourseNo(MyCourseVo myCourseVo) {
-        return myCourseMapper.selectPasswordByCourseNo(myCourseVo);
+        int i = myCourseMapper.selectPasswordByCourseNo(myCourseVo);
+        if (i>0){
+            int attendance = myAttendanceService.selectAttendanceByCondition(myCourseVo);
+            if(attendance > 0){
+                ResultDataUtil.throwExcepion(CommonEnum.HAS_CLOCK);
+            }
+            myAttendanceService.saveAttendance(myCourseVo);
+        }else {
+            ResultDataUtil.throwExcepion(CommonEnum.CONFIRMCLOCK_NOTEXIT);
+        }
+
+
+        return i;
     }
 }

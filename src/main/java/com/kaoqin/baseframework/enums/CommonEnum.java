@@ -43,6 +43,9 @@ public enum CommonEnum implements BaseInfoInterface {
     CONFIRMCLOCK_SUCCESS(2101,"打卡成功"),
 
     CONFIRMCLOCK_FAILUER(2151,"打卡失败"),
+    CONFIRMCLOCK_NOTEXIT(2151,"口令错误"),
+
+    HAS_CLOCK(2030,"已经完成打卡"),
 
     NOT_EXIST_USER(2000, "用户名或密码错误");
 
