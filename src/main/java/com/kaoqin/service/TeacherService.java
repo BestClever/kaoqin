@@ -11,7 +11,7 @@ public interface TeacherService {
 
     void confirmClock(CourseinfoVO courseinfoVO);
 
-    PageWrapper getAttendance(CourseinfoVO courseinfoVO);
+    PageWrapper getAttendance(AttendanceVo courseinfoVO);
 
     TeacherVO getOne(StudentVO studentVO);
 

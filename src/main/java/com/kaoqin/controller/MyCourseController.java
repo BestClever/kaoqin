@@ -7,10 +7,13 @@ import com.kaoqin.baseframework.result.ResultDataUtil;
 import com.kaoqin.baseframework.result.ResultInfo;
 import com.kaoqin.service.MyCourseService;
 import com.kaoqin.vo.MyCourseVo;
+import com.kaoqin.vo.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author BestClever
@@ -29,7 +32,9 @@ public class MyCourseController {
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public DataGridResultInfo list(MyCourseVo myCourseVo) {
+    public DataGridResultInfo list(HttpServletRequest request, MyCourseVo myCourseVo) {
+        SysUser sysUser = (SysUser) request.getSession().getAttribute("loginUser");
+        myCourseVo.setStudentNo(sysUser.getUserNo());
         PageWrapper pageInfo = myCourseService.listAllInfo(myCourseVo);
         return ResultDataUtil.createQueryResult(pageInfo);
     }
@@ -45,4 +50,13 @@ public class MyCourseController {
         //在考勤表中新增一条数据
         return ResultDataUtil.createSuccess(CommonEnum.CONFIRMCLOCK_SUCCESS);
     }
+
+    @RequestMapping(value = "/courseInfo")
+    @ResponseBody
+    public DataGridResultInfo toCourseInfo(MyCourseVo myCourseVo) {
+
+       // return ResultDataUtil.createQueryResult();
+        return myCourseService.listCourseStudent(myCourseVo);
+    }
+
 }

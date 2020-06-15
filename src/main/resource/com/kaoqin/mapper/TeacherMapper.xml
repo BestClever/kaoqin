@@ -3,95 +3,77 @@
 <mapper namespace="com.kaoqin.mapper.TeacherMapper">
 
     <select id="listAllInfo" resultType="com.kaoqin.vo.CourseinfoVO" parameterType="com.kaoqin.vo.CourseinfoVO">
-		SELECT
-		t.teacher_no,
-		t.teacher_name,
-		d.college,
-		d.professional,
-		d.grade,
-		c.course_name,
-		c.course_no,
-		c.coursse_password
-		FROM
-		t_sys_teacher t
-		LEFT JOIN t_sys_teach tc ON t.teacher_no = tc.teacher_no
-		LEFT JOIN t_sys_courseinfo c ON tc.course_no = c.course_no
-		LEFT JOIN t_sys_dept d ON c.dept_id = d.dept_id
-		<where>
-			<if test="teacherNo!='' and teacherNo!=null">
-				t.teacher_no = #{teacherNo,jdbcType=VARCHAR}
-			</if>
-		</where>
+        SELECT
+        c.course_no,
+        c.course_name,
+        c.course_no,
+        c.course_password,
+        t.teacher_name,
+        d.college,
+        d.professional,
+        d.grade
+        FROM
+        t_sys_course c
+        LEFT JOIN t_sys_dept d ON c.dept_id = d.dept_id
+        LEFT JOIN t_sys_teach t ON c.course_no = t.course_no
+        LEFT JOIN t_sys_teach h ON t.course_no = h.course_no
+        <where>
+            <if test="teacherName!='' and teacherName!=null">
+                and t.teacher_name = #{teacherName,jdbcType=VARCHAR}
+            </if>
+            <if test="courseName!='' and courseName!=null">
+                and c.course_name = #{courseName,jdbcType=VARCHAR}
+            </if>
+        </where>
     </select>
 
-	<update id="updateVommand" parameterType="com.kaoqin.vo.CourseinfoVO">
-		UPDATE t_sys_courseinfo SET coursse_password = #{coursePassword,jdbcType=VARCHAR} WHERE course_no = #{courseNo,jdbcType=VARCHAR}
+    <update id="updateVommand" parameterType="com.kaoqin.vo.CourseinfoVO">
+		UPDATE t_sys_course SET course_password = #{coursePassword,jdbcType=VARCHAR} WHERE course_no = #{courseNo,jdbcType=VARCHAR}
 
 	</update>
 
-	<select id="getAttendance" resultType="com.kaoqin.vo.CourseinfoVO" parameterType="com.kaoqin.vo.CourseinfoVO">
-		SELECT
-				s.student_no,
-				s.student_name,
-				d.college,
-				d.professional,
-				d.grade,
-				t1.teacher_name,
-				c.course_name,
-				c.course_no,
-				c.course_password,
-				a.attendance_no,
-				a.attendance_memo
-        FROM
- 			 t_sys_student s
-        LEFT JOIN t_sys_take t ON s.student_no = t.student_no
-        LEFT JOIN t_sys_course c ON t.course_no = c.course_no
-        LEFT JOIN t_sys_teach t1 ON c.course_no = t1.course_no
-        LEFT JOIN t_sys_dept d ON s.dept_id = d.dept_id
-		LEFT JOIN t_sys_attendance a ON a.student_no = c.course_no AND a.coruse_no = c.course_no
-		<where>
-			<if test="courseName!='' and courseName!=null">
-				c.course_name = #{courseName,jdbcType=VARCHAR}
-			</if>
-		</where>
-	</select>
+    <select id="getAttendance" resultType="com.kaoqin.vo.AttendanceVo" parameterType="com.kaoqin.vo.AttendanceVo">
+        SELECT t.*,c.course_name FROM t_sys_attendance t LEFT JOIN t_sys_course c ON t.coruse_no = c.course_no
+        <where>
+            <if test="courseName!='' and courseName!=null">
+                c.course_name = #{courseName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
 
 
-	<select id="getOne" resultType="com.kaoqin.vo.TeacherVO" parameterType="com.kaoqin.vo.StudentVO">
-		select * from  t_sys_teacher
-		<where>
-			teacher_no = #{studentNo ,jdbcType=VARCHAR}
-		</where>
-	</select>
+    <select id="getOne" resultType="com.kaoqin.vo.TeacherVO" parameterType="com.kaoqin.vo.StudentVO">
+        select * from t_sys_teacher
+        <where>
+            teacher_no = #{studentNo ,jdbcType=VARCHAR}
+        </where>
+    </select>
 
-	<insert id="saveStudent" parameterType="com.kaoqin.domain.Teacher">
+    <insert id="saveStudent" parameterType="com.kaoqin.domain.Teacher">
 		INSERT INTO  t_sys_teacher (teacher_no, teacher_name, password,  dept_id) VALUES (
     #{teacherNo,jdbcType=VARCHAR},"老师",#{password,jdbcType=VARCHAR},"1001"
     )
 	</insert>
 
-	<update id="upstudents" parameterType="com.kaoqin.vo.AttendanceVo">
-		update
-		 	t_sys_student t
-		SET
-		<where>
-			<if test="studentNo!='' and studentNo!=null">
-				t.studentNo = #{studentNo,jdbcType=VARCHAR}
-			</if>
-			<if test="passworld!='' and passworld!=null">
-				t.passworld = #{passworld,jdbcType=VARCHAR}
-			</if>
+    <update id="upstudents" parameterType="com.kaoqin.vo.AttendanceVo">
+        update
+        t_sys_student t
+        SET
+        t.password = #{password,jdbcType=VARCHAR}
+        <where>
+            <if test="studentNo!='' and studentNo!=null">
+                t.student_no = #{studentNo,jdbcType=VARCHAR}
+            </if>
+        </where>
 
-		</where>
+    </update>
 
-	</update>
-
-	<update id="upstudentss" parameterType="com.kaoqin.vo.AttendanceVo">
+    <update id="upstudentss" parameterType="com.kaoqin.vo.AttendanceVo">
 		update
 		 	t_sys_attendance t
 		SET
 		attendance_memo  = #{attendanceMemo,jdbcType=VARCHAR}
-		when
+		WHERE
 		attendance_no = #{attendanceNo,jdbcType=VARCHAR}
 	</update>
 </mapper>

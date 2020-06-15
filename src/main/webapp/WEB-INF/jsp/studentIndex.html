@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>学生列表</title>
+
     <link rel="stylesheet" href="lib/layui/css/layui.css" media="all">
 </head>
 <body class="layui-layout-body">
@@ -26,9 +27,6 @@
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> <span id="username"></span>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd>
-                        <a href="basicStudnetInfo">基本资料</a>
-                    </dd>
                 </dl>
             </li>
             <li class="layui-nav-item">
@@ -60,22 +58,31 @@
 <!--操作-->
 <script type="text/html" id="tableTool">
     <a class="layui-btn layui-btn-xs" lay-event="clock">打卡</a>
+    <a class="layui-btn layui-btn-xs" lay-event="courseInfo">课程信息</a>
 </script>
 <script src="lib/layui/layui.js" charset="utf-8"></script>
 <script>
     //JavaScript代码区域
-    layui.use(['element', 'table', 'form', 'jquery', 'layer'], function () {
+    layui.use(['element', 'table', 'form', 'jquery', 'layer','customUtil'], function () {
         var element = layui.element;
         table = layui.table,
             $ = layui.jquery,
+            customUtil = layui.customUtil,
             layer = layui.layer,
             form = layui.form;
 
         //获取 username
-        $.post('login/getUserName', '', function (result) {
+        // $.post('login/getUserName', '', function (result) {
+        //     if (result.success) {
+        //         $("#username").html(result.data);
+        //     }
+        // });
+        customUtil.ajax('login/getUserName','post','',true).done(function (result) {
             if (result.success) {
-                $("#username").val(result.data);
+                $("#username").html(result.data);
             }
+        }).fail(function (result) {
+            console.log("----->"+result)
         });
 
         var myCourseTalbe = table.render({
@@ -91,7 +98,7 @@
                 , {field: 'college', title: '学院', sort: true}
                 , {field: 'professional', title: '专业'}
                 , {field: 'grade', title: '班级', sort: true}
-                , {title: '操作', templet: '#tableTool', fixed: "right", align: "center"}
+                , {title: '操作', toolbar: '#tableTool', fixed: "right", align: "center"}
             ]]
             , page: true
         });
@@ -101,7 +108,6 @@
                 where: data.field,
                 page: {curr: 1}
             });
-            console.log("0000")
             return false;
         });
 
@@ -110,6 +116,9 @@
             switch (obj.event) {
                 case "clock":
                     clock(data);
+                    break;
+                case "courseInfo":
+                    courseInfo(data);
                     break;
             }
         });
@@ -124,7 +133,6 @@
                     courseNo: localData.courseNo
                 }
                 $.post('myCourse/confirmClock', data, function (result) {
-                    debugger
                     if (result.success) {
                         layer.msg(result.msg);
                         layer.close(index);
@@ -133,6 +141,22 @@
                         layer.close(index);
                     }
                 });
+            });
+        }
+
+        function courseInfo(data) {
+            layer.open({
+                type: 2,
+                area: ['1200px', '450px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: 'toCourseInfo',
+                success:function (layero) {
+                    var iframeWin = window[layero.find("iframe")[0]["name"]];
+                    //iframeWin.initForm(data);
+                    var courseNo = iframeWin.document.getElementById("courseNo");
+                    courseNo.value = data.courseNo;
+                }
             });
         }
     });

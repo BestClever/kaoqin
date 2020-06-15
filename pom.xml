@@ -94,6 +94,13 @@
     <!-- https://mvnrepository.com/artifact/c3p0/c3p0 -->
     <!-- https://mvnrepository.com/artifact/c3p0/c3p0 -->
     <dependency>
+      <groupId>com.microsoft.sqlserver</groupId>
+      <artifactId>sqljdbc4</artifactId>
+      <version>4.0</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
       <groupId>c3p0</groupId>
       <artifactId>c3p0</artifactId>
       <version>0.9.1.2</version>
@@ -218,6 +225,12 @@
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjweaver</artifactId>
       <version>1.8.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>0.9.1</version>
     </dependency>
 
     <dependency>

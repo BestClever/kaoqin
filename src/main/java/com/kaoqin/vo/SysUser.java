@@ -8,9 +8,18 @@ package com.kaoqin.vo;
  * @date 2020-05-28 11:01
  */
 public class SysUser {
+    private String userNo;
     private String userName;
     private String password;
     private String deptId;
+
+    public String getUserNo() {
+        return userNo;
+    }
+
+    public void setUserNo(String userNo) {
+        this.userNo = userNo;
+    }
 
     public String getUserName() {
         return userName;

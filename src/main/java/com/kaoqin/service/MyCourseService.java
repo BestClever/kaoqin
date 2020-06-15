@@ -1,6 +1,7 @@
 package com.kaoqin.service;
 
 import com.github.pagehelper.PageInfo;
+import com.kaoqin.baseframework.result.DataGridResultInfo;
 import com.kaoqin.baseframework.result.PageWrapper;
 import com.kaoqin.vo.MyCourseVo;
 
@@ -18,4 +19,6 @@ public interface MyCourseService {
     PageWrapper listAllInfo(MyCourseVo myCourseVo);
 
     int selectPasswordByCourseNo(MyCourseVo myCourseVo);
+
+    DataGridResultInfo listCourseStudent(MyCourseVo myCourseVo);
 }

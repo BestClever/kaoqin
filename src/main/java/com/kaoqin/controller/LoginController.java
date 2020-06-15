@@ -8,6 +8,8 @@ import com.kaoqin.baseframework.result.ResultInfo;
 import com.kaoqin.domain.Teacher;
 import com.kaoqin.service.StudentService;
 import com.kaoqin.service.TeacherService;
+import com.kaoqin.util.Audience;
+import com.kaoqin.util.JwtTokenUtil;
 import com.kaoqin.vo.StudentVO;
 import com.kaoqin.vo.SysUser;
 import com.kaoqin.vo.TeacherVO;
@@ -58,11 +60,13 @@ public class LoginController {
                 return ResultDataUtil.createFail(CommonEnum.NOT_EXIST_USER);
             }
             SysUser sysUser = new SysUser();
+            sysUser.setUserNo(one.getStudentNo());
             sysUser.setUserName(one.getStudentName());
             sysUser.setDeptId(one.getDeptId());
             sysUser.setPassword(one.getPassword());
             request.getSession().setAttribute("loginUser", sysUser);
-            return ResultDataUtil.createSuccess(CommonEnum.LOGIN_SUCCESS_STUDENT);
+            String token = JwtTokenUtil.createJWT(one.getStudentNo(), one.getStudentName(), Audience.getAudience());
+            return ResultDataUtil.createSuccess(CommonEnum.LOGIN_SUCCESS_STUDENT).setData(token);
         }
         return ResultDataUtil.createSuccess(CommonEnum.LOGIN_FAILURE);
 

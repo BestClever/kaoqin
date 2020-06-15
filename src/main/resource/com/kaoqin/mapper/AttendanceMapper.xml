@@ -7,7 +7,12 @@
     </insert>
 
     <select id="selectListStudentInfo" parameterType="com.kaoqin.vo.AttendanceVo" resultType="com.kaoqin.vo.AttendanceVo">
-        select * from t_sys_attendance
+        select t.*,s.course_name from t_sys_attendance t LEFT JOIN t_sys_course s ON t.coruse_no = s.course_no
+        <trim prefix="WHERE" prefixOverrides="AND | OR" >
+            <if test="studentName != null and studentName != ''">
+                AND student_name like CONCAT(CONCAT('%', #{studentName}), '%')
+            </if>
+        </trim>
     </select>
 
     <select id="selectAttendanceByCondition" parameterType="com.kaoqin.vo.MyCourseVo" resultType="int">

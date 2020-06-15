@@ -78,6 +78,8 @@
 
         function goto_register() {
             $("#register-username").val("");
+            $("#register-id").val("");
+            $("#role1").val("");
             $("#register-password").val("");
             $("#register-repassword").val("");
             $("#register-code").val("");
@@ -151,11 +153,14 @@
                     role  :role
                 };
                 $.post(url,data,function (result) {
-                    if(result.sucess){
+                    if(result.success){
                         if(result.code == 9001){
-                            window.location.href = 'index';
-                        }else if(result.code == 9011){
+                            localStorage.setItem('token',result.data);//将缓存存入 localstorge中
+                            window.location.href = 'index.html';
 
+                        }else if(result.code == 9011){
+                            localStorage.setItem('token',result.data);
+                            window.location.href = 'teacher.html';
                         }
 
                     }else {
@@ -168,15 +173,15 @@
 
         //注册
         function register() {
-            var username = $("#register-username").val(),
+            var  username= $("#register-username").val(),
+                id= $("#register-id").val(),
                 password = $("#register-password").val(),
                 repassword = $("#register-repassword").val(),
                 code = $("#register-code").val(),
                 flag = false,
                 validatecode = null;
 
-            var role = $("#role").val();
-
+            var role1 = $("#role1").val();
             debugger
             //判断用户名密码是否为空
             if (username == "") {
@@ -187,6 +192,17 @@
                     width: 'auto',
                     height: 'auto',
                     content: "用户名不能为空"
+                });
+                flag = true;
+            }
+            if (id == "") {
+                $.pt({
+                    target: $("#register-id"),
+                    position: 'r',
+                    align: 't',
+                    width: 'auto',
+                    height: 'auto',
+                    content: "id不能为空"
                 });
                 flag = true;
             }
@@ -222,7 +238,7 @@
                     align: 't',
                     width: 'auto',
                     height: 'auto',
-                    content: "用户名必须为15位以下的字母或数字"
+                    content: "id必须为15位以下的字母或数字"
                 });
                 flag = true;
             }
@@ -250,12 +266,13 @@
 
                 var url = "login/register";
                 var data = {
-                    studentNo:username,
+                    studentName: id,
+                    studentNo:  username,
                     password:password,
-                    role  :role
+                    role  : role1
                 };
                 $.post(url,data,function (result) {
-                    if(result.sucess){
+                    if(result.success){
                         spop({
                             template: '<h4 class="spop-title">注册成功</h4>即将于3秒后返回登录',
                             position: 'top-center',
@@ -485,10 +502,7 @@
 								</label>
 							</span>
                         <span class="input input--hideo">
-                            <select name="role" class="input__field input__field&#45;&#45;hideo">
-                                <option value="1">教师</option>
-                                <option value="2">学生</option>
-                            </select>
+
 								<!--<input class="input__field input__field&#45;&#45;hideo" type="text" id="forget-code"-->
                                        <!--autocomplete="off" placeholder="请输入注册码"/>-->
 								<!--<label class="input__label input__label&#45;&#45;hideo" for="forget-code">-->
@@ -528,8 +542,16 @@
                 <div class="pad input-container">
                     <section class="content">
 							<span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="text" id="register-username"
+								<input class="input__field input__field--hideo" type="text" id="register-id"
                                        autocomplete="off" placeholder="请输入用户名" maxlength="15"/>
+								<label class="input__label input__label--hideo" for="register-id">
+									<i class="fa fa-fw fa-user icon icon--hideo"></i>
+									<span class="input__label-content input__label-content--hideo"></span>
+								</label>
+							</span>
+                        <span class="input input--hideo">
+								<input class="input__field input__field--hideo" type="text" id="register-username"
+                                       autocomplete="off" placeholder="请输入用户名id" maxlength="15"/>
 								<label class="input__label input__label--hideo" for="register-username">
 									<i class="fa fa-fw fa-user icon icon--hideo"></i>
 									<span class="input__label-content input__label-content--hideo"></span>
@@ -552,16 +574,16 @@
 								</label>
 							</span>
                         <span class="input input--hideo">
+                            <select name="role1" id="role1" class="input__field input__field&#45;&#45;hideo">
+                                <option value="1">教师</option>
+                                <option value="2">学生</option>
+                            </select>
 								<!--<input class="input__field input__field&#45;&#45;hideo" type="text" id="register-code"-->
                                        <!--autocomplete="off" placeholder="请输入注册码"/>-->
 								<!--<label class="input__label input__label&#45;&#45;hideo" for="register-code">-->
 									<!--<i class="fa fa-fw fa-wifi icon icon&#45;&#45;hideo"></i>-->
 									<!--<span class="input__label-content input__label-content&#45;&#45;hideo"></span>-->
 								<!--</label>-->
-                            <select name="role" class="input__field input__field&#45;&#45;hideo">
-                                <option value="1">教师</option>
-                                <option value="2">学生</option>
-                            </select>
 							</span>
                     </section>
                 </div>

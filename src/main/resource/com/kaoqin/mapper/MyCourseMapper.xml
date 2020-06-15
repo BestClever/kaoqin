@@ -4,29 +4,44 @@
 
     <select id="listAllInfo" resultType="com.kaoqin.vo.MyCourseVo" parameterType="com.kaoqin.vo.MyCourseVo">
         SELECT
-		s.student_no,
-		s.student_name,
-		d.college,
-		d.professional,
-		d.grade,
-		t1.teacher_name,
-		c.course_name,
-		c.course_no,
-		c.course_password
-		FROM
-			t_sys_student s
-			LEFT JOIN t_sys_take t ON s.student_no = t.student_no
-			LEFT JOIN t_sys_course c ON t.course_no = c.course_no
-			LEFT JOIN t_sys_teach t1 ON c.course_no = t1.course_no
-			LEFT JOIN t_sys_dept d ON s.dept_id = d.dept_id
-		<where>
-			<if test="courseName!='' and courseName!=null">
-				c.course_name = #{courseName,jdbcType=VARCHAR}
-			</if>
-		</where>
+        s.student_no,
+        s.student_name,
+        d.college,
+        d.professional,
+        d.grade,
+        t1.teacher_name,
+        c.course_name,
+        c.course_no,
+        c.course_password
+        FROM
+        t_sys_student s
+        LEFT JOIN t_sys_take t ON s.student_no = t.student_no
+        LEFT JOIN t_sys_course c ON t.course_no = c.course_no
+        LEFT JOIN t_sys_teach t1 ON c.course_no = t1.course_no
+        LEFT JOIN t_sys_dept d ON s.dept_id = d.dept_id
+        <where>
+            <if test="courseName!='' and courseName!=null">
+                c.course_name = #{courseName,jdbcType=VARCHAR}
+            </if>
+            1=1
+            and s.student_no = #{studentNo}
+        </where>
+
     </select>
 
-	<select id="selectPasswordByCourseNo" parameterType="com.kaoqin.vo.MyCourseVo" resultType="int">
+    <select id="selectPasswordByCourseNo" parameterType="com.kaoqin.vo.MyCourseVo" resultType="int">
 		select count(1) from t_sys_course where course_no = #{courseNo} and course_password = #{coursePassword}
+	</select>
+
+    <select id="listCourseStudent" resultType="com.kaoqin.vo.MyCourseVo" parameterType="com.kaoqin.vo.MyCourseVo">
+		SELECT s.student_no,s.student_name,(SELECT COUNT(1) FROM t_sys_attendance a where s.student_no = a.student_no) as attendanceNum  FROM t_sys_student s INNER JOIN t_sys_take t ON s.student_no = t.student_no
+		<where>
+            <if test="courseNo!=null and courseNo !=''">
+                and  t.course_no =#{courseNo}
+            </if>
+            <if test="studentName!=null and studentName !=''">
+                and  s.student_name like concat('%',#{studentName,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
 	</select>
 </mapper>

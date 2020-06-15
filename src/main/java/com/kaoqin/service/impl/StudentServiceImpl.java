@@ -30,6 +30,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public int saveStudnet(StudentVO studentVO) {
         Student student = new Student();
+        student.setDeptId("1001");
         BeanUtil.copyProperties(studentVO, student);
         return studentMapper.saveStudent(student);
     }

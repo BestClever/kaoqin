@@ -11,7 +11,7 @@ public class CourseinfoVO   {
     private String courseNo;
     private String courseName;
     private String teacherName;
-    private String courssePassword;
+    private String coursePassword;
     private String college;
     private String professional;
     private String grade;
@@ -75,12 +75,12 @@ public class CourseinfoVO   {
         this.teacherName = teacherName;
     }
 
-    public String getCourssePassword() {
-        return courssePassword;
+    public String getCoursePassword() {
+        return coursePassword;
     }
 
-    public void setCourssePassword(String courssePassword) {
-        this.courssePassword = courssePassword;
+    public void setCoursePassword(String coursePassword) {
+        this.coursePassword = coursePassword;
     }
 
     public String getCollege() {

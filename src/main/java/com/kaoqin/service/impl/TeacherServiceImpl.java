@@ -1,6 +1,7 @@
 package com.kaoqin.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.kaoqin.baseframework.result.PageWrapper;
@@ -41,11 +42,11 @@ public class TeacherServiceImpl  implements TeacherService {
     }
 
     @Override
-    public PageWrapper getAttendance(CourseinfoVO courseinfoVO) {
+    public PageWrapper getAttendance(AttendanceVo courseinfoVO) {
 
         PageHelper.startPage(courseinfoVO.getPage(),courseinfoVO.getLimit());
-        List<CourseinfoVO> courseinfoVOS = teacherMapper.listAllInfo(courseinfoVO);
-        PageInfo<CourseinfoVO> pageInfo = new PageInfo<>(courseinfoVOS);
+        List<AttendanceVo> courseinfoVOS = teacherMapper.getAttendance(courseinfoVO);
+        PageInfo<AttendanceVo> pageInfo = new PageInfo<>(courseinfoVOS);
         PageWrapper pageWrapper = new PageWrapper();
         pageWrapper.setTotal(pageInfo.getTotal());
         pageWrapper.setList(pageInfo.getList());
@@ -67,8 +68,7 @@ public class TeacherServiceImpl  implements TeacherService {
 
     @Override
     public void upstudents(AttendanceVo attendanceVo) {
-        if (attendanceVo.getAttendanceMemo() == null ){
-
+        if (StrUtil.isBlank(attendanceVo.getAttendanceMemo())){
             teacherMapper.upstudents(attendanceVo);
         }
         teacherMapper.upstudentss(attendanceVo);

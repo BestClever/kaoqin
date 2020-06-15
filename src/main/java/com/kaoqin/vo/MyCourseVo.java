@@ -19,6 +19,8 @@ public class MyCourseVo {
     private String professional;
     private String grade;
 
+    private String attendanceNum; //打卡数量
+
     private int page=1;//代表当前页码
     private int limit=10;//代表每页数据量
 
@@ -108,5 +110,13 @@ public class MyCourseVo {
 
     public void setGrade(String grade) {
         this.grade = grade;
+    }
+
+    public String getAttendanceNum() {
+        return attendanceNum;
+    }
+
+    public void setAttendanceNum(String attendanceNum) {
+        this.attendanceNum = attendanceNum;
     }
 }

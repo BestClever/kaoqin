@@ -21,4 +21,6 @@ public interface MyCourseMapper {
      * @return
      */
     int selectPasswordByCourseNo(MyCourseVo myCourseVo);
+
+    List<MyCourseVo> listCourseStudent(MyCourseVo myCourseVo);
 }

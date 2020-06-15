@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping(value = "")
 public class SysController {
-    @RequestMapping(value = "/toLogin",method = RequestMethod.GET)
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String toLogin(Model model, HttpServletRequest request) throws Exception {
 
         return "/login";
@@ -26,8 +26,8 @@ public class SysController {
     @RequestMapping(value = "/index")
     public String index(){
         //判断是角色 是 老师还是学生
-        return "/studentIndexs";
-//        return "/teacherIndex";
+//        return indexss();
+        return "/studentIndex";
     }
 
     @RequestMapping(value = "/toAttendanceStudent")
@@ -40,11 +40,29 @@ public class SysController {
         return "/basicStudnetInfo";
     }
 
+
+    @RequestMapping(value = "/indexs")
+    public String indexs(){
+        //判断是角色 是 老师还是学生
+        return "/studentIndexs";
+//        return "/teacherIndex";
+    }
+    @RequestMapping(value = "/teacher")
+    public String indexss(){
+
+        return "/teacherIndex";
+    }
+
     @RequestMapping(value = "/logout")
     public String logout(HttpServletRequest request){
         //移除 session
         request.getSession().removeAttribute("loginUser");
         return "/login";
+    }
+
+    @RequestMapping(value = "/toCourseInfo")
+    public String toCourseInfo(){
+        return "/courseInfo";
     }
 
 }

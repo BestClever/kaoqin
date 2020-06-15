@@ -3,6 +3,7 @@ package com.kaoqin.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.kaoqin.baseframework.enums.CommonEnum;
+import com.kaoqin.baseframework.result.DataGridResultInfo;
 import com.kaoqin.baseframework.result.PageWrapper;
 import com.kaoqin.baseframework.result.ResultDataUtil;
 import com.kaoqin.mapper.MyCourseMapper;
@@ -51,8 +52,15 @@ public class MyCourseServiceImpl implements MyCourseService {
         }else {
             ResultDataUtil.throwExcepion(CommonEnum.CONFIRMCLOCK_NOTEXIT);
         }
-
-
         return i;
+    }
+
+    public DataGridResultInfo listCourseStudent(MyCourseVo myCourseVo){
+        List<MyCourseVo> myCourseVoList = myCourseMapper.listCourseStudent(myCourseVo);
+        PageInfo<MyCourseVo> pageInfo = new PageInfo<>(myCourseVoList);
+        PageWrapper pageWrapper = new PageWrapper();
+        pageWrapper.setList(pageInfo.getList());
+        pageWrapper.setTotal(pageInfo.getTotal());
+        return ResultDataUtil.createQueryResult(pageWrapper);
     }
 }

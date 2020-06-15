@@ -58,7 +58,7 @@
         //获取 username
         $.post('login/getUserName', '', function (result) {
             if (result.success) {
-                $("#username").val(result.data);
+                $("#username").html(result.data);
             }
         });
 

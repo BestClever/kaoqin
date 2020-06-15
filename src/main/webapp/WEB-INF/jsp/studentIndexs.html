@@ -14,16 +14,16 @@
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
             <li class="layui-nav-item">
-                <a href="index">我的课程</a>
+                <a href="teacher">我的课程</a>
             </li>
             <li class="layui-nav-item">
-                <a href="">考勤信息</a>
+                <a href="indexs">考勤信息</a>
             </li>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> <span id="username">王越</span>
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> <span id="username">张云飞</span>
                 </a>
                 <dl class="layui-nav-child">
                     <dd>
@@ -41,63 +41,62 @@
             <form class="layui-form">
                 <div class="layui-inline">
                     <div class="layui-input-inline">
-                        <input type="text" name="courseName" class="layui-input searchVal" placeholder="请输入搜索的内容" />
+                        <input type="text" name="courseName" class="layui-input searchVal" placeholder="请输入搜索的内容"/>
                     </div>
                     <!--<button class="layui-btn" lay-submit lay-filter="search">-->
-                        <!--<i class="layui-icon layui-icon-search"></i>-->
+                    <!--<i class="layui-icon layui-icon-search"></i>-->
                     <!--</button>-->
                     <!--<a class="layui-btn search_btn" data-type="reload" lay-submit lay-filter="search">搜索</a>-->
                     <a class="layui-btn" data-type="reload" lay-submit lay-filter="search">搜索</a>
                 </div>
             </form>
         </blockquote>
-        </div>
-
-        <table class="layui-hide" id="myCourse" lay-filter="dataTable"></table>
     </div>
+
+    <table class="layui-hide" id="myCourse" lay-filter="dataTable"></table>
+</div>
 </div>
 
 <!--操作-->
 <script type="text/html" id="tableTool">
     <a class="layui-btn layui-btn-xs" lay-event="clock">修改考勤</a>
     <a class="layui-btn layui-btn-xs" lay-event="clock1">修改学生密码</a>
-    <a class="layui-btn layui-btn-xs" lay-event="clock2">修改账户</a>
-
-
 </script>
 <script src="lib/layui/layui.js" charset="utf-8"></script>
 <script>
     //JavaScript代码区域
-    layui.use(['element', 'table', 'form','jquery'], function () {
+    layui.use(['element', 'table', 'form', 'jquery', 'customUtil'], function () {
         var element = layui.element;
         table = layui.table,
-        $ = layui.jquery,
-        form = layui.form;
+            customUtil = layui.customUtil,
+            $ = layui.jquery,
+            form = layui.form;
 
         //获取 username
-        $.post('login/getUserName','',function (result) {
-            if(result.success){
-                $("#username").val(result.data);
-            }
+        // $.post('login/getUserName', '', function (result) {
+        //     if (result.success) {
+        //         $("#username").val(result.data);
+        //     }
+        // });
+
+        customUtil.ajax('login/getUserName','post','',true).done(function (result) {
+            if (result.success) {
+                        $("#username").html(result.data);
+                    }
+        }).fail(function (result) {
+
         });
 
         var myCourseTalbe = table.render({
             elem: '#myCourse'
-            , url: 'myCourse/list'
+            , url: 'teacher/lists'
+            ,size:"sm"
             , cols: [[
-                {field: 'studentNo',  title: '学号', sort: true}
-
-                , {field: 'studentName',  title: '学生姓名'}
-                , {field: 'courseNo', title: '课程编号', sort: true}
-                , {field: 'courseName',  title: '课程名称'}
-                , {field: 'teacherName', title: '老师名称', minWidth: 150}
-                , {field: 'coursePassword',  title: '课程口令', sort: true}
-                , {field: 'college',  title: '学院', sort: true}
-                , {field: 'professional', title: '专业'}
-                , {field: 'grade', title: '班级', sort: true}
-                , {field: 'attendanceNo',  title: '考勤编号'}
+                {field: 'studentNo', title: '学号'}
+                , {field: 'studentName', title: '学生姓名'}
+                , {field: 'courseName', title: '课程名称'}
                 , {field: 'attendanceMemo', title: '考勤信息', sort: true}
-                , {title: '操作', templet: '#tableTool', fixed: "right", align: "center"}
+                , {fixed: 'right',title: '操作', toolbar: '#tableTool'}
             ]]
             , page: true
         });
@@ -107,7 +106,6 @@
                 where: data.field,
                 page: {curr: 1}
             });
-            console.log("0000")
             return false;
         });
 
@@ -121,33 +119,54 @@
                     clock1(data);
                     break;
                 case "clock2":
-                    clock3(data);
+                    clock2(data);
                     break;
 
             }
         });
-        
+
         function clock(data) {
-            layer.prompt({title: '请输入修改的考勤信息', formType: 3}, function(text, index){
+            layer.prompt({title: '请输入修改的考勤信息', formType: 3}, function (text, index) {
                 layer.close(index);
-                $.post('teacher/upstudents',{'attendanceMemo':text, 'attendanceNo':data.attendanceNo},function (result) {
-
+                $.post('teacher/upstudents', {
+                    'attendanceMemo': text,
+                    'attendanceNo': data.attendanceNo
+                }, function (result) {
+                    debugger
+                    if (result.success) {
+                        layer.msg("修改成功！！");
+                        $(".layui-laypage-btn")[0].click();
+                    }else {
+                        layer.msg(result.msg);
+                    }
                 });
             });
         }
+
         function clock1(data) {
-            layer.prompt({title: '请输入修改的学生密码', formType: 3}, function(text, index){
+            layer.prompt({title: '请输入修改的学生密码', formType: 3}, function (text, index) {
                 layer.close(index);
-                $.post('teacher/upstudents',{'password':text,'studentNo':data.studentNo},function (result) {
-
+                $.post('teacher/upstudents', {'password': text, 'studentNo': data.studentNo}, function (result) {
+                    if (result.success) {
+                        layer.msg("修改成功！！");
+                        $(".layui-laypage-btn")[0].click();
+                    }else {
+                        layer.msg(result.msg);
+                    }
                 });
             });
         }
-        function clock2(data) {
-            layer.prompt({title: '请输入修改的学生账户', formType: 3}, function(text, index){
-                layer.close(index);
-                $.post('teacher/upstudents',{studentNo:text,'studentNo':data.studentNo},function (result) {
 
+        function clock2(data) {
+            layer.prompt({title: '请输入修改的学生账户', formType: 3}, function (text, index) {
+                layer.close(index);
+                $.post('teacher/upstudents', {studentNo: text, 'studentNo': data.studentNo}, function (result) {
+                    if (result.success) {
+                        layer.msg("修改成功！！");
+                        $(".layui-laypage-btn")[0].click();
+                    }else {
+                        layer.msg(result.msg);
+                    }
                 });
             });
         }
