@@ -16,15 +16,17 @@
         t_sys_course c
         LEFT JOIN t_sys_dept d ON c.dept_id = d.dept_id
         LEFT JOIN t_sys_teach t ON c.course_no = t.course_no
-        LEFT JOIN t_sys_teach h ON t.course_no = h.course_no
-        <where>
-            <if test="teacherName!='' and teacherName!=null">
-                and t.teacher_name = #{teacherName,jdbcType=VARCHAR}
+        <trim prefix="WHERE" prefixOverrides="AND | OR" >
+            <if test="teacherName != null and teacherName != ''">
+                and t.teacher_name like CONCAT(CONCAT('%', #{teacherName}), '%')
             </if>
-            <if test="courseName!='' and courseName!=null">
-                and c.course_name = #{courseName,jdbcType=VARCHAR}
+            <if test="courseName != null and courseName != ''">
+                and c.course_name like CONCAT(CONCAT('%', #{courseName}), '%')
             </if>
-        </where>
+            <if test="teacherNo != null and teacherNo != ''">
+                and c.teacher_no = #{teacherNo})
+            </if>
+        </trim>
     </select>
 
     <update id="updateVommand" parameterType="com.kaoqin.vo.CourseinfoVO">

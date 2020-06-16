@@ -28,13 +28,6 @@ public class TeacherController {
     @Autowired
     private TeacherService service;
 
-
-
-//    @RequestMapping(/s)
-//    public ResultInfo getslogin(){
-//
-//    }
-
     @RequestMapping("/list")
     @ResponseBody
     public DataGridResultInfo getTecher(HttpServletRequest request, CourseinfoVO courseinfoVO){
