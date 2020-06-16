@@ -50,8 +50,8 @@
     </select>
 
     <insert id="saveStudent" parameterType="com.kaoqin.domain.Teacher">
-		INSERT INTO  t_sys_teacher (teacher_no, teacher_name, password,  dept_id) VALUES (
-    #{teacherNo,jdbcType=VARCHAR},"老师",#{password,jdbcType=VARCHAR},"1001"
+		INSERT INTO  t_sys_teacher (teacher_no, teacher_name, password,dept_id) VALUES (
+    #{teacherNo,jdbcType=VARCHAR},#{teacherName},#{password,jdbcType=VARCHAR},"1001"
     )
 	</insert>
 

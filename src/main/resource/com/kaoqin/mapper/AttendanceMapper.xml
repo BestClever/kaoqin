@@ -10,7 +10,10 @@
         select t.*,s.course_name from t_sys_attendance t LEFT JOIN t_sys_course s ON t.coruse_no = s.course_no
         <trim prefix="WHERE" prefixOverrides="AND | OR" >
             <if test="studentName != null and studentName != ''">
-                AND student_name like CONCAT(CONCAT('%', #{studentName}), '%')
+                AND t.student_name like CONCAT(CONCAT('%', #{studentName}), '%')
+            </if>
+            <if test="studentNo != null and studentNo != ''">
+                AND t.student_no =#{studentNo}
             </if>
         </trim>
     </select>

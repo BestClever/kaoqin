@@ -23,7 +23,7 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> <span id="username">张云飞</span>
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> <span id="username"></span>
                 </a>
                 <dl class="layui-nav-child">
                     <dd>
@@ -73,11 +73,11 @@
             form = layui.form;
 
         //获取 username
-        // $.post('login/getUserName', '', function (result) {
-        //     if (result.success) {
-        //         $("#username").val(result.data);
-        //     }
-        // });
+        $.post('login/getUserName', '', function (result) {
+            if (result.success) {
+                $("#username").val(result.data);
+            }
+        });
 
         customUtil.ajax('login/getUserName','post','',true).done(function (result) {
             if (result.success) {

@@ -23,7 +23,7 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> <span id="username">王越</span>
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> <span id="username"></span>
                 </a>
                 <dl class="layui-nav-child">
                 </dl>
@@ -78,7 +78,7 @@
         //获取 username
         $.post('login/getUserName','',function (result) {
             if(result.success){
-                $("#username").val(result.data);
+                $("#username").html(result.data);
             }
         });
 

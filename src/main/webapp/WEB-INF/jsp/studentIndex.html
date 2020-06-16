@@ -72,11 +72,11 @@
             form = layui.form;
 
         //获取 username
-        // $.post('login/getUserName', '', function (result) {
-        //     if (result.success) {
-        //         $("#username").html(result.data);
-        //     }
-        // });
+        $.post('login/getUserName', '', function (result) {
+            if (result.success) {
+                $("#username").html(result.data);
+            }
+        });
         customUtil.ajax('login/getUserName','post','',true).done(function (result) {
             if (result.success) {
                 $("#username").html(result.data);
